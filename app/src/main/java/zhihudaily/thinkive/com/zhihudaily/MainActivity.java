@@ -23,8 +23,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
-
-        //
         MainFragment mainFragment =new MainFragment();
         //把MainFragment替换xml空白de FramLayout
         getSupportFragmentManager().beginTransaction()
