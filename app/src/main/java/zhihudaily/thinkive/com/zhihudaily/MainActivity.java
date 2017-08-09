@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import zhihudaily.thinkive.com.zhihudaily.homepage.MainFragment;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
@@ -21,6 +23,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
+
+        //
+        MainFragment mainFragment =new MainFragment();
+        //把MainFragment替换xml空白de FramLayout
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.layout_fragment, mainFragment, "MainFragment")
+                .commit();
+        showMainFragment();
     }
 
     private void initViews() {

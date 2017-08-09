@@ -1,5 +1,4 @@
 package zhihudaily.thinkive.com.zhihudaily.homepage;
-
 /*
  *  @项目名：  ZhiHuDaily 
  *  @包名：    zhihudaily.thinkive.com.zhihudaily.homepage
@@ -20,16 +19,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import zhihudaily.thinkive.com.zhihudaily.R;
+import zhihudaily.thinkive.com.zhihudaily.adapter.MainPagerAdapter;
 
 public class MainFragment extends Fragment {
     private TabLayout tabLayout;
+    private ZhihuDailyFragment zhihuDailyFragment;
+    private GuokrFragment guokrFragment;
+    private DoubanMomentFragment doubanMomentFragment;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        new ZhihuDailyFragment();
-
     }
 
     @Nullable
@@ -44,7 +44,8 @@ public class MainFragment extends Fragment {
         tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.view_pager);
         Context context = getContext();
-        // MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(getChildFragmentManager(),context,,new GuokrFragment(),new DoubanMomentFragment());
-        //viewPager.setAdapter(mainPagerAdapter);
+        // TODO: 2017/8/9 0009 fragment 怎么传入adapter中
+        MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(getChildFragmentManager(), context, zhihuDailyFragment,guokrFragment, doubanMomentFragment);
+        viewPager.setAdapter(mainPagerAdapter);
     }
 }
