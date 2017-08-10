@@ -19,6 +19,9 @@ import zhihudaily.thinkive.com.zhihudaily.homepage.DoubanMomentFragment;
 import zhihudaily.thinkive.com.zhihudaily.homepage.GuokrFragment;
 import zhihudaily.thinkive.com.zhihudaily.homepage.ZhihuDailyFragment;
 
+/**
+ * 该类内的每一个生成的 Fragment 都将保存在内存之中
+ */
 public class MainPagerAdapter extends FragmentPagerAdapter {
 
     private final ZhihuDailyFragment zhihuDailyFragment;

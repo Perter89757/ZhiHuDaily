@@ -1,11 +1,11 @@
-package zhihudaily.thinkive.com.zhihudaily.homepage;
+package zhihudaily.thinkive.com.zhihudaily.bookmarks;
 
 /*
  *  @项目名：  ZhiHuDaily 
- *  @包名：    zhihudaily.thinkive.com.zhihudaily.homepage
- *  @文件名:   GuokrFragment
+ *  @包名：    zhihudaily.thinkive.com.zhihudaily.bookmarks
+ *  @文件名:   BookmarksFragment
  *  @创建者:   HuangYanHui
- *  @创建时间:  2017/8/8 0008 22:37
+ *  @创建时间:  2017/8/10 0010 22:05
  *  @描述：    TODO
  */
 
@@ -15,29 +15,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import zhihudaily.thinkive.com.zhihudaily.R;
 
-public class GuokrFragment extends Fragment {
-
-    private TextView markTv;
-
-    public static GuokrFragment newInstance() {
-        return new GuokrFragment();
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+public class BookmarksFragment extends Fragment {
+    public static BookmarksFragment newInstance() {
+        return new BookmarksFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
-        markTv = (TextView) view.findViewById(R.id.markTV);
-        markTv.setText("guoker");
         return view;
     }
 }

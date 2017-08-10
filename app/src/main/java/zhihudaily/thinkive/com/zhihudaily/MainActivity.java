@@ -3,6 +3,7 @@ package zhihudaily.thinkive.com.zhihudaily;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,17 +18,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     private DrawerLayout drawer;
     private NavigationView navigationView;
+    private MainFragment mainFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
-        MainFragment mainFragment =new MainFragment();
-        //把MainFragment替换xml空白de FramLayout
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.layout_fragment, mainFragment, "MainFragment")
-                .commit();
+
+        //判断是否有系统保存的Fragment
+        //判断Fragement是否add到activity中
+        //没有add,就把fragment
+        //显示隐藏Fragment
+
+
+        if (savedInstanceState == null) {
+            mainFragment = MainFragment.newInstance();
+        } else {
+            mainFragment = (MainFragment) getSupportFragmentManager().
+                    getFragment(savedInstanceState, "MainFragment");
+        }
+
+        if (!mainFragment.isAdded()) {
+            getSupportFragmentManager()
+                    .beginTransaction().
+                    add(R.id.layout_fragment, mainFragment, "MainFragment")
+                    .commit();
+        }
+
+
         showMainFragment();
     }
 
@@ -61,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             showBookmarksFragment();
         } else if (id == R.id.nav_change_theme) {
             //改变主题
-        }else if (id == R.id.nav_settings) {
+        } else if (id == R.id.nav_settings) {
             //startActivity(new Intent(this,SettingsPreferenceActivity.class));
         } else if (id == R.id.nav_about) {
             //startActivity(new Intent(this,AboutPreferenceActivity.class));
@@ -74,6 +93,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void showMainFragment() {
-
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.show(mainFragment);
+        // fragmentTransaction.hide()
+        fragmentTransaction.commit();
+        toolbar.setTitle(getResources().getString(R.string.app_name));
     }
 }

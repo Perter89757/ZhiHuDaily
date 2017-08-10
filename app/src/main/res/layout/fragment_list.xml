@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2017 lizhaotailang
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,29 +14,33 @@
   ~ limitations under the License.
   -->
 
-<android.support.v4.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refreshLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/refreshLayout">
-<TextView
-    android:text="知乎日报Fragemnt"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_marginTop="50dp"
+        android:text=":;;;;;"
+        android:id="@+id/markTV"
+        android:textSize="50sp"
+        android:textColor="@android:color/holo_blue_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:focusable="true"
-        android:clickable="true">
+        android:clickable="true"
+        android:focusable="true">
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/recyclerView"
-            android:scrollbars="vertical"
+            android:fadeScrollbars="true"
             android:scrollbarFadeDuration="1"
-            android:fadeScrollbars="true"/>
+            android:scrollbars="vertical" />
 
     </FrameLayout>
+
 
 </android.support.v4.widget.SwipeRefreshLayout>
