@@ -9,14 +9,32 @@ package zhihudaily.thinkive.com.zhihudaily.homepage.zhihu;
  *  @描述：    TODO
  */
 
+import zhihudaily.thinkive.com.zhihudaily.CallBack;
+
 public class ZhihuDailyPresenter implements ZhihuDailyContract.ZhihuDailyPresenter {
     private ZhihuDailyContract.ZhihuDailyView view;
+    private final ZhihuDailyContract.ZhihuDailyModle modle;
+
     public ZhihuDailyPresenter(ZhihuDailyContract.ZhihuDailyView view) {
         this.view = view;
+        modle = new ZhihuDailyContract.ZhihuDailyModle();
     }
 
     @Override
     public void loadData() {
+        view.showLoading();
+        modle.load(new CallBack() {
+            @Override
+            public void onError() {
+                view.loadError();
+            }
+
+            @Override
+            public void onSuccess() {
+                view.loadSccuess();
+            }
+        });
+        view.hideLoading();
 
     }
 }
