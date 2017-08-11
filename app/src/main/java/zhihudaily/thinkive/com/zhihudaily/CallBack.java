@@ -9,8 +9,10 @@ package zhihudaily.thinkive.com.zhihudaily;
  *  @描述：    TODO
  */
 
-public interface CallBack {
-    void onError();
+import com.squareup.okhttp.Request;
 
-    void onSuccess();
+public interface CallBack<T> {
+    void onError(Request request,Exception e);
+
+    void onSuccess(T t);
 }

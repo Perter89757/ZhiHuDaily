@@ -9,30 +9,35 @@ package zhihudaily.thinkive.com.zhihudaily.homepage.zhihu;
  *  @描述：    TODO
  */
 
+import com.squareup.okhttp.Request;
+
+import zhihudaily.thinkive.com.zhihudaily.BaseModle;
 import zhihudaily.thinkive.com.zhihudaily.CallBack;
+import zhihudaily.thinkive.com.zhihudaily.bean.ZhihuDailyNews;
 
 public class ZhihuDailyPresenter implements ZhihuDailyContract.ZhihuDailyPresenter {
     private ZhihuDailyContract.ZhihuDailyView view;
-    private final ZhihuDailyContract.ZhihuDailyModle modle;
+    private final BaseModle request;
 
     public ZhihuDailyPresenter(ZhihuDailyContract.ZhihuDailyView view) {
         this.view = view;
-        modle = new ZhihuDailyContract.ZhihuDailyModle();
+        request = new BaseModle();
     }
 
     @Override
     public void loadData() {
         view.showLoading();
-        modle.load(new CallBack() {
+       request.zhiHuLoadData("", new CallBack<ZhihuDailyNews>() {
             @Override
-            public void onError() {
+            public void onError(Request request, Exception e) {
                 view.loadError();
             }
 
-            @Override
-            public void onSuccess() {
-                view.loadSccuess();
-            }
+           @Override
+           public void onSuccess(ZhihuDailyNews bean) {
+               view.loadSccuess();
+           }
+
         });
         view.hideLoading();
 

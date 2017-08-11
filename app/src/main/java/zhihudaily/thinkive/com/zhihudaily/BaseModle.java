@@ -9,6 +9,29 @@ package zhihudaily.thinkive.com.zhihudaily;
  *  @描述：    TODO
  */
 
-public interface BaseModle {
-    void load(CallBack callBack);
+import com.google.gson.Gson;
+import com.squareup.okhttp.Request;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import zhihudaily.thinkive.com.zhihudaily.bean.ZhihuDailyNews;
+
+public class BaseModle {
+    //请求网络
+    public void zhiHuLoadData(String url, final CallBack callBack) {
+        OkHttpUtils.get().url(url).addParams("", "").build().execute(new StringCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
+                callBack.onError(request, e);
+            }
+
+            @Override
+            public void onResponse(String response) {
+                Gson gson = new Gson();
+                ZhihuDailyNews zhihuDailyNews = gson.fromJson(response, ZhihuDailyNews.class);
+                callBack.onSuccess(zhihuDailyNews);
+            }
+        });
+    }
+
 }

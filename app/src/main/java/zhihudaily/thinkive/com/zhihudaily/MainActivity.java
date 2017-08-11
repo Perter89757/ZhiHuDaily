@@ -45,8 +45,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     add(R.id.layout_fragment, mainFragment, "MainFragment")
                     .commit();
         }
-
-
         showMainFragment();
     }
 

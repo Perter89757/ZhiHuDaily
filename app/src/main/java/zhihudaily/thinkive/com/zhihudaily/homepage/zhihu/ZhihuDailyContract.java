@@ -9,10 +9,8 @@ package zhihudaily.thinkive.com.zhihudaily.homepage.zhihu;
  *  @描述：    TODO
  */
 
-import zhihudaily.thinkive.com.zhihudaily.BaseModle;
 import zhihudaily.thinkive.com.zhihudaily.BasePresenter;
 import zhihudaily.thinkive.com.zhihudaily.BaseView;
-import zhihudaily.thinkive.com.zhihudaily.CallBack;
 
 public interface ZhihuDailyContract {
     interface ZhihuDailyView extends BaseView {
@@ -22,14 +20,5 @@ public interface ZhihuDailyContract {
     interface ZhihuDailyPresenter extends BasePresenter {
 
     }
-
-    class ZhihuDailyModle implements BaseModle {
-
-        @Override
-        public void load(CallBack callBack) {
-
-        }
-    }
-
 
 }
