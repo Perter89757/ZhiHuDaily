@@ -15,7 +15,6 @@ import zhihudaily.thinkive.com.zhihudaily.BaseView;
 public interface ZhihuDailyContract {
     interface ZhihuDailyView<ZhihuDailyNews> extends BaseView {
         void setPresenter(zhihudaily.thinkive.com.zhihudaily.homepage.zhihu.ZhihuDailyPresenter presenter);
-
         zhihudaily.thinkive.com.zhihudaily.homepage.zhihu.ZhihuDailyPresenter getPersenter();
     }
 

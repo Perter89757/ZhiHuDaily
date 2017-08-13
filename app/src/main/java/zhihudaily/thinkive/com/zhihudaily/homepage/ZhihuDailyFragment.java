@@ -95,6 +95,9 @@ public class ZhihuDailyFragment extends Fragment implements ZhihuDailyContract.Z
             super.onScrolled(recyclerView, dx, dy);
             //往下拉的判断
             isSlidingToLast = dy > 0;
+            //SwipeRefreshLayout和RecyclerView一起使用的时候,下拉冲突
+            int topRowVerticalPosition = (recyclerView == null || recyclerView.getChildCount() == 0) ? 0 : recyclerView.getChildAt(0).getTop();
+            refresh.setEnabled(topRowVerticalPosition >= 0);
         }
     }
 
