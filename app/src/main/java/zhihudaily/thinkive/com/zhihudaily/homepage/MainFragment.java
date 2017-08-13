@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 
 import zhihudaily.thinkive.com.zhihudaily.R;
 import zhihudaily.thinkive.com.zhihudaily.adapter.MainPagerAdapter;
+import zhihudaily.thinkive.com.zhihudaily.homepage.zhihu.ZhihuDailyPresenter;
 
 public class MainFragment extends Fragment {
     private TabLayout tabLayout;
@@ -27,10 +28,12 @@ public class MainFragment extends Fragment {
     private GuokrFragment guokrFragment;
     private DoubanMomentFragment doubanMomentFragment;
     private Context context;
+    private ZhihuDailyPresenter zhihuDailyPresenter;
 
     public static MainFragment newInstance() {
         return new MainFragment();
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +47,10 @@ public class MainFragment extends Fragment {
             guokrFragment = (GuokrFragment) getChildFragmentManager().getFragment(savedInstanceState, "guokr");
             doubanMomentFragment = (DoubanMomentFragment) getChildFragmentManager().getFragment(savedInstanceState, "douban");
         }
-
+        //怎么传入view,通过让Fragment实现view接口
+        zhihuDailyPresenter = new ZhihuDailyPresenter(zhihuDailyFragment);
+        //把MainFragment中的presenter传递给zhihudailyFragment
+        //为什么要在MainFragment中new
     }
 
     @Override
@@ -67,7 +73,8 @@ public class MainFragment extends Fragment {
     private void initViews(View view) {
         tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.view_pager);
-
+        //预加载 -->页面来回切换时,不会触发加载onCreatView
+        viewPager.setOffscreenPageLimit(3);
         // TODO: 2017/8/9 0009 fragment 怎么传入adapter中
         MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(getChildFragmentManager(), context, zhihuDailyFragment, guokrFragment, doubanMomentFragment);
         viewPager.setAdapter(mainPagerAdapter);

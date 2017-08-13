@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import zhihudaily.thinkive.com.zhihudaily.homepage.MainFragment;
+import zhihudaily.thinkive.com.zhihudaily.homepage.zhihu.ZhihuDailyPresenter;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

@@ -9,12 +9,12 @@ package zhihudaily.thinkive.com.zhihudaily;
  *  @描述：    TODO
  */
 
-public interface BaseView {
+public interface BaseView<T> {
     void showLoading();
 
     void hideLoading();
 
     void loadError();
 
-    void loadSccuess();
+    void loadSccuess(T t);
 }
