@@ -9,6 +9,7 @@ package zhihudaily.thinkive.com.zhihudaily.homepage.zhihu;
  *  @描述：    TODO
  */
 
+import android.content.Context;
 import android.util.Log;
 
 import com.squareup.okhttp.Request;
@@ -25,7 +26,10 @@ public class ZhihuDailyPresenter implements ZhihuDailyContract.ZhihuDailyPresent
     private ZhihuDailyContract.ZhihuDailyView view;
     private final BaseModle request;
     private DateFormatter formatter = new DateFormatter();
+    private Context context;
+
     public ZhihuDailyPresenter(ZhihuDailyContract.ZhihuDailyView view) {
+        this.context = context;
         this.view = view;
         this.view.setPresenter(this);
         request = new BaseModle();
@@ -70,5 +74,10 @@ public class ZhihuDailyPresenter implements ZhihuDailyContract.ZhihuDailyPresent
                 view.hideLoading();
             }
         });
+    }
+
+    @Override
+    public void startReading(int position) {
+
     }
 }

@@ -10,6 +10,7 @@ package zhihudaily.thinkive.com.zhihudaily.homepage;
  */
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,7 @@ import java.util.List;
 import zhihudaily.thinkive.com.zhihudaily.R;
 import zhihudaily.thinkive.com.zhihudaily.adapter.ZhihuDailyNewsAdapter;
 import zhihudaily.thinkive.com.zhihudaily.bean.ZhihuDailyNews;
+import zhihudaily.thinkive.com.zhihudaily.detail.DetailActivity;
 import zhihudaily.thinkive.com.zhihudaily.homepage.zhihu.ZhihuDailyContract;
 import zhihudaily.thinkive.com.zhihudaily.homepage.zhihu.ZhihuDailyPresenter;
 
@@ -65,11 +67,28 @@ public class ZhihuDailyFragment extends Fragment implements ZhihuDailyContract.Z
         refresh.setRefreshing(true);
         dailyPresenter.loadData(Calendar.getInstance().getTimeInMillis());
         refresh.setOnRefreshListener(this);
+
+        initListener();
         return view;
+    }
+
+    private void initListener() {
+        zhihuDailyNewsAdapter.setOnItemListener(new ZhihuDailyNewsAdapter.OnItemListener() {
+            @Override
+            public void onClick(View v, ZhihuDailyNews.Question bean) {
+                Intent intent = new Intent(getContext(), DetailActivity.class);
+                intent.putExtra("type", "zhihu")
+                        .putExtra("id", bean.getId())
+                        .putExtra("title", bean.getTitle())
+                        .putExtra("coverUrl", bean.getImages().get(0));
+                getActivity().startActivity(intent);
+            }
+        });
     }
 
     class scrollListenter extends RecyclerView.OnScrollListener {
         boolean isSlidingToLast = false;
+
         @Override
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
@@ -83,7 +102,7 @@ public class ZhihuDailyFragment extends Fragment implements ZhihuDailyContract.Z
                 // 判断是否滚动到底部并且是向下滑动
                 if (lastVisibleItem == (totalItemCount - 1) && isSlidingToLast) {
                     Calendar calendar = Calendar.getInstance();
-                    calendar.set(mYear,mMonth,--mDay);
+                    calendar.set(mYear, mMonth, --mDay);
                     //加载更多
                     dailyPresenter.loadMore(calendar.getTimeInMillis());
                     //
@@ -120,8 +139,8 @@ public class ZhihuDailyFragment extends Fragment implements ZhihuDailyContract.Z
 
     @Override
     public void loadSccuess(Object o) {
-        List<ZhihuDailyNews> bean = (List<ZhihuDailyNews>) o;
-        zhihuDailyNewsAdapter.setData(bean);
+        List<ZhihuDailyNews> list = (List<ZhihuDailyNews>) o;
+        zhihuDailyNewsAdapter.setData(list);
         recyclerView.setAdapter(zhihuDailyNewsAdapter);
     }
 

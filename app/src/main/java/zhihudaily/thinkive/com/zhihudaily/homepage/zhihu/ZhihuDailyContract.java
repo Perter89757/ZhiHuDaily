@@ -21,7 +21,9 @@ public interface ZhihuDailyContract {
     }
 
     interface ZhihuDailyPresenter extends BasePresenter {
-
+        void loadData(long url);
+        void loadMore(long date);
+        void startReading(int position);
     }
 
 }

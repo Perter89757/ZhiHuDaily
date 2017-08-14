@@ -51,4 +51,10 @@ public class BaseModle {
             }
         });
     }
+
+    public void Loaddetail(){
+
+    }
+
+
 }

@@ -10,6 +10,5 @@ package zhihudaily.thinkive.com.zhihudaily;
  */
 
 public interface BasePresenter {
-    void loadData(long url);
-    void loadMore(long date);
+
 }

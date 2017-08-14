@@ -57,6 +57,16 @@ public class ZhihuDailyNewsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         } else {
             View view = LayoutInflater.from(mContext).inflate(R.layout.home_list_item_layout, parent, false);
             zhihuViewHodler zhihuViewHodler = new zhihuViewHodler(view);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onItemListener != null) {
+                       int postion = (int) v.getTag();
+                        ZhihuDailyNews.Question  question= newsBean.get(postion);
+                        onItemListener.onClick(v,question);
+                    }
+                }
+            });
             return zhihuViewHodler;
         }
     }
@@ -73,6 +83,7 @@ public class ZhihuDailyNewsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                         .error(R.drawable.placeholder)
                         .into(((zhihuViewHodler) (holder)).itemImage);
             }
+            holder.itemView.setTag(position);
         }
     }
 
@@ -110,6 +121,16 @@ public class ZhihuDailyNewsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         public FootViewHolder(View itemView) {
             super(itemView);
         }
+    }
+
+    public interface OnItemListener {
+        void onClick(View v, ZhihuDailyNews.Question postion);
+    }
+
+    private OnItemListener onItemListener;
+
+    public void setOnItemListener(OnItemListener listener) {
+        onItemListener = listener;
     }
 
 
