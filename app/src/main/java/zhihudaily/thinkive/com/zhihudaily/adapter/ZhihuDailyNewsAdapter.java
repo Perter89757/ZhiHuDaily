@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import zhihudaily.thinkive.com.zhihudaily.R;
 import zhihudaily.thinkive.com.zhihudaily.bean.ZhihuDailyNews;
@@ -25,20 +26,26 @@ import zhihudaily.thinkive.com.zhihudaily.bean.ZhihuDailyNews;
 
 public class ZhihuDailyNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
-    private ZhihuDailyNews zhihuDailyNews = new ZhihuDailyNews();
     private int FootView = 1;
-
+    List<ZhihuDailyNews.Question> newsBean = new ArrayList<ZhihuDailyNews.Question>();
+    List<ZhihuDailyNews> zhihuDailyNewsList = new ArrayList<>();
 
     public ZhihuDailyNewsAdapter(Context context) {
         mContext = context;
     }
 
-    public void setData(ZhihuDailyNews zhihuDailyNewsBean) {
-        zhihuDailyNews = zhihuDailyNewsBean;
+    public void setData(List<ZhihuDailyNews> zhihuDailyNewsList) {
+        this.zhihuDailyNewsList = zhihuDailyNewsList;
+        newsBean.clear();
+        for (ZhihuDailyNews QuestionList : zhihuDailyNewsList) {
+            for (ZhihuDailyNews.Question bean : QuestionList.getStories()) {
+                newsBean.add(bean);
+            }
+        }
     }
 
-    public ZhihuDailyNews getData() {
-        return zhihuDailyNews;
+    public List<ZhihuDailyNews> getData() {
+        return zhihuDailyNewsList;
     }
 
     @Override
@@ -57,11 +64,11 @@ public class ZhihuDailyNewsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof zhihuViewHodler) {
-            ArrayList<ZhihuDailyNews.Question> list = zhihuDailyNews.getStories();
-            if (list != null) {
-                ((zhihuViewHodler) holder).title.setText(list.get(position).getTitle());
+            ZhihuDailyNews.Question bean = newsBean.get(position);
+            if (bean != null) {
+                ((zhihuViewHodler) holder).title.setText(bean.getTitle());
                 Glide.with(mContext)
-                        .load(list.get(position).getImages().get(0))
+                        .load(bean.getImages().get(0))
                         .placeholder(R.drawable.placeholder)
                         .error(R.drawable.placeholder)
                         .into(((zhihuViewHodler) (holder)).itemImage);
@@ -71,7 +78,7 @@ public class ZhihuDailyNewsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public int getItemViewType(int position) {
-        if (position == zhihuDailyNews.getStories().size()) {
+        if (position == newsBean.size()) {
             return FootView;
         }
         return 0;
@@ -79,7 +86,7 @@ public class ZhihuDailyNewsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public int getItemCount() {
-        return zhihuDailyNews.getStories().size() + 1;
+        return newsBean.size() + 1;
     }
 
     class zhihuViewHodler extends RecyclerView.ViewHolder {

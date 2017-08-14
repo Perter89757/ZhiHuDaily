@@ -13,6 +13,8 @@ import android.util.Log;
 
 import com.squareup.okhttp.Request;
 
+import java.util.List;
+
 import zhihudaily.thinkive.com.zhihudaily.BaseModle;
 import zhihudaily.thinkive.com.zhihudaily.CallBack;
 import zhihudaily.thinkive.com.zhihudaily.bean.ZhihuDailyNews;
@@ -34,7 +36,7 @@ public class ZhihuDailyPresenter implements ZhihuDailyContract.ZhihuDailyPresent
         view.showLoading();
         Log.d("ZhihuDailyFragment","loadData");
         String url = Api.ZHIHU_HISTORY+formatter.ZhihuDailyDateFormat(date);
-        request.zhiHuLoadData(url, new CallBack<ZhihuDailyNews>() {
+        request.zhiHuLoadData(url, new CallBack<List<ZhihuDailyNews>>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.loadError();
@@ -42,7 +44,7 @@ public class ZhihuDailyPresenter implements ZhihuDailyContract.ZhihuDailyPresent
             }
 
             @Override
-            public void onSuccess(ZhihuDailyNews bean) {
+            public void onSuccess(List<ZhihuDailyNews> bean) {
                 view.loadSccuess(bean);
                 view.hideLoading();
             }
@@ -55,7 +57,7 @@ public class ZhihuDailyPresenter implements ZhihuDailyContract.ZhihuDailyPresent
         view.showLoading();
         Log.d("ZhihuDailyFragment","loadMore");
         String url = Api.ZHIHU_HISTORY+formatter.ZhihuDailyDateFormat(date);
-        request.zhihuLoadMore(url, new CallBack<ZhihuDailyNews>() {
+        request.zhihuLoadMore(url, new CallBack<List<ZhihuDailyNews>>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.loadError();
@@ -63,8 +65,8 @@ public class ZhihuDailyPresenter implements ZhihuDailyContract.ZhihuDailyPresent
             }
 
             @Override
-            public void onSuccess(ZhihuDailyNews bean) {
-                view.loadSccuess(bean);
+            public void onSuccess(List<ZhihuDailyNews> list) {
+                view.loadSccuess(list);
                 view.hideLoading();
             }
         });

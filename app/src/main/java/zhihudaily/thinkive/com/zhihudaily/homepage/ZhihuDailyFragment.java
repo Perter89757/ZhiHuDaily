@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.Calendar;
+import java.util.List;
 
 import zhihudaily.thinkive.com.zhihudaily.R;
 import zhihudaily.thinkive.com.zhihudaily.adapter.ZhihuDailyNewsAdapter;
@@ -119,10 +120,9 @@ public class ZhihuDailyFragment extends Fragment implements ZhihuDailyContract.Z
 
     @Override
     public void loadSccuess(Object o) {
-        ZhihuDailyNews bean = (ZhihuDailyNews) o;
+        List<ZhihuDailyNews> bean = (List<ZhihuDailyNews>) o;
         zhihuDailyNewsAdapter.setData(bean);
         recyclerView.setAdapter(zhihuDailyNewsAdapter);
-        Log.d("ZhihuDailyFragment", "加载完成,数据大小:"+bean.getStories().size());
     }
 
     @Override

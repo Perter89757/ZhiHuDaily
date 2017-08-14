@@ -75,7 +75,7 @@ public class MainFragment extends Fragment {
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.view_pager);
         //预加载 -->页面来回切换时,不会触发加载onCreatView
         viewPager.setOffscreenPageLimit(3);
-        // TODO: 2017/8/9 0009 fragment 怎么传入adapter中
+        // TODO: 2017/8/9 0009 fragment 怎么传入ViewPage的adapter中
         MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(getChildFragmentManager(), context, zhihuDailyFragment, guokrFragment, doubanMomentFragment);
         viewPager.setAdapter(mainPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
