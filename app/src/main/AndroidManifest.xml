@@ -18,11 +18,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".detail.DetailActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
+        <activity
+            android:name=".detail.DetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        </activity>
+        <service
+            android:name=".service.DownLoadService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".about.AboutActivity"></activity>
     </application>
 
 </manifest>

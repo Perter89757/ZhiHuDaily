@@ -1,5 +1,6 @@
 package zhihudaily.thinkive.com.zhihudaily;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,8 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import zhihudaily.thinkive.com.zhihudaily.about.AboutActivity;
 import zhihudaily.thinkive.com.zhihudaily.homepage.MainFragment;
-import zhihudaily.thinkive.com.zhihudaily.homepage.zhihu.ZhihuDailyPresenter;
+import zhihudaily.thinkive.com.zhihudaily.service.DownLoadService;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private MainFragment mainFragment;
+    private DownLoadService.downBinder mservice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void initViews() {
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -82,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_settings) {
             //startActivity(new Intent(this,SettingsPreferenceActivity.class));
         } else if (id == R.id.nav_about) {
-            //startActivity(new Intent(this,AboutPreferenceActivity.class));
+            startActivity(new Intent(this,AboutActivity.class));
         }
         return true;
     }
@@ -98,4 +102,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
         toolbar.setTitle(getResources().getString(R.string.app_name));
     }
+
 }

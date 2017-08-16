@@ -28,7 +28,6 @@ public class DetailActivity extends AppCompatActivity {
         presenter = new detailPagePresenter(this);
         initData();
         initView();
-
     }
 
     private void initView() {
